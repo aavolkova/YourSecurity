@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <meta charset="UTF-8" />
+    <title>Welcome</title>
+</head>
+
+<body>
+
+<!--Use for SpringSecurity #4:-->
+
+<div sec:authorize="isAuthenticated()">
+    <br>
+    Welcome to uor Secure Home Page! This content is shown to ALL authenticated users.
+    <br><br>
+    <div><a href="/logout">Logout</a></div>
+</div>
+
+
+<div sec:authorize="hasAuthority('ADMIN')">
+    Hi, Admin!
+    <br>
+    Logged admin: <span sec:authentication="name">The admin is not logged in yet</span>
+    <br><br>
+    <div><a href="/admin" type="submit">Go to Admin Page</a></div>
+    This content is only shown to administrators.
+</div>
+
+<br><br>
+
+<div sec:authorize="hasAuthority('USER')">
+    Hi, User!
+    <br>
+    Logged user: <span sec:authentication="name">The user is not logged in yet</span>
+    <br><br>
+    <div><a href="/secure" type="submit">Go to Secure User's Page</a></div>
+    This content is only shown to All users.
+</div>
+
+
+</body>
+</html>
